@@ -15,3 +15,11 @@ class Users(db.Model):
         self.password = password
         self.name = name
         self.email = email
+
+''' definindo schema para facilitar o JSON'''
+class UsersSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'username', 'name', 'email', 'password', 'created_on')
+
+user_schema = UsersSchema()
+users_schame = UsersSchema(many=True)
