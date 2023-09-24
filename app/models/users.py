@@ -22,4 +22,4 @@ class UsersSchema(ma.Schema):
         fields = ('id', 'username', 'name', 'email', 'password', 'created_on')
 
 user_schema = UsersSchema()
-users_schame = UsersSchema(many=True)
+users_schema = UsersSchema(many=True)
