@@ -15,9 +15,36 @@ def post_user():
         db.session.add(user)
         db.session.commit()
         result = user_schema.dump(user)
-        return jsonify({'message': 'successfully registered', 'data': result.data}), 201
+        return jsonify({'message': 'successfully registered', 'data': result}), 201
     except Exception as erro:
         print(erro)
         print(type(erro))
         return jsonify({'message': 'unable to create', 'data': {}}), 500   
+    
+def update_user(id):
+    username = request.json['username']
+    password = request.json['password']
+    name = request.json['name']
+    email = request.json['email']
+
+    user = Users.query.get(id)
+
+    if not user:
+        return jsonify({'message': 'user dont exist', 'data': {}}), 404
+    
+    pass_hash = generate_password_hash(password)
+
+    try:
+        user.username = username
+        user.password = pass_hash
+        user.name = name
+        user.email = email
+        db.session.commit()
+        result = user_schema.dump(user)
+        print(result)
+        return jsonify({'message': 'successufully updated', 'data': result}), 201
+    except Exception as erro:
+        print(erro)
+        print(type(erro))
+        return jsonify({'message': 'unable to update', 'data': {}}), 500   
 

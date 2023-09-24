@@ -7,5 +7,9 @@ def root():
     return jsonify({'message': 'Hello World!'})
 
 @app.route('/users', methods=['POST'])
-def post_user():
+def post_users():
     return users.post_user()
+
+@app.route('/users/<id>', methods=['PUT'])
+def update_users(id):
+    return users.update_user(id)
