@@ -55,3 +55,11 @@ def get_users():
         return jsonify({'message': 'successfully fetched', 'data': result})
     
     return jsonify({'message': 'nothing found', 'data': {}})
+
+def get_user(id):
+    user = Users.query.get(id)
+    if user:
+        result = user_schema.dump(user)
+        return jsonify({'message': 'successfully fetched', 'data': result})
+    
+    return jsonify({'message': 'user dont exists', 'data': {}})
