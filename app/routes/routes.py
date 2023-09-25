@@ -3,8 +3,9 @@ from flask import jsonify
 from ..views import users, helper
 
 @app.route('/', methods=['GET'])
-def root():
-    return jsonify({'message': 'Hello World!'})
+@helper.token_required
+def root(current_user):
+    return jsonify({'message': f'Hello {current_user.name}!'})
 
 @app.route('/users', methods=['POST'])
 def post_users():
